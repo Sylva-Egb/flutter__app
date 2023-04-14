@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 
 
+
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
 
@@ -18,11 +19,17 @@ class _HomePageState extends State<HomePage> {
         children: [
           Row(
             children: [
-              
+              Expanded(
+                child: Image.network(
+                  // URL de ma photo de profil depuis un reseau social linkedin
+                  'https://media.licdn.com/dms/image/D4D35AQFwqy7W4UiakQ/profile-framedphoto-shrink_400_400/0/1673191675259?e=1681912800&v=beta&t=Mwjle9DlTklteKkeGRj6-uL6s49Y5k9l1MKCXfBF1KE',
+                  fit: BoxFit.cover,
+                ),
+              ),
               Expanded(
                 child: Image.asset(
                   // Chemin local de ma photo  image
-                  '',
+                  'assets/images/moi.jpg',
                   fit: BoxFit.cover,
                 ),
               ),

@@ -8,47 +8,95 @@ class LoginPage extends StatefulWidget {
 }
 
 class _LoginPageState extends State<LoginPage> {
-  final _formKey = GlobalKey<FormState>();
+  bool _showPassword = false;
+  final TextEditingController _usernameController = TextEditingController();
+  final TextEditingController _passwordController = TextEditingController();
+  String _username = '';
+  String _password = '';
+
+  final Color _appBarColor = Colors.blue;
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-        margin: const EdgeInsets.all(20),
-        child: Form(
-          key: _formKey,
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text('Connexion Réussie'),
+        backgroundColor: _appBarColor,
+      ),
+      body: Center(
+        child: Padding(
+          padding: const EdgeInsets.all(15.0),
           child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Container(
-                margin: const EdgeInsets.only(bottom: 10),
-                child: TextFormField(
-                  decoration: const InputDecoration(
-                      labelText: 'Nom utilisateur',
-                      hintText: 'Entrez le nom utilisateur',
-                      border: OutlineInputBorder()),
-                  validator: (value) {
-                    if (value == null || value.isEmpty) {
-                      return " Le champ  est vide";
-                    }
-                    return null;
-                  },
+              TextFormField(
+                controller: _usernameController,
+                decoration: const InputDecoration(
+                  labelText: 'Nom d\'utilisateur',
+                  border: OutlineInputBorder(),
                 ),
               ),
-              const SizedBox(
-                width: double.infinity,
-                height: 30,
-                child: ElevatedButton(
-                  onPressed: () {
-                    if (_formkey.currentState!.validate()) {
-                      ScaffoldMessenger.of(context).showSnackBar(
-                          const SnackBar(content: Text("Envoi en cours...")));
-                      FocusScope.of(context).requestFocus();
-                    }
-                  },
-                  child: null,
+              const SizedBox(height: 15.0),
+              TextFormField(
+                controller: _passwordController,
+                obscureText: !_showPassword,
+                decoration: InputDecoration(
+                  labelText: 'Mot De Passe',
+                  border: const OutlineInputBorder(),
+                  suffixIcon: IconButton(
+                    icon: Icon(
+                      _showPassword ? Icons.visibility_off : Icons.visibility,
+                      color: Colors.blueGrey,
+                    ),
+                    onPressed: () {
+                      setState(() {
+                        _showPassword = !_showPassword;
+                      });
+                    },
+                  ),
                 ),
+              ),
+              const SizedBox(height: 16.0),
+              ElevatedButton(
+                onPressed: () {
+                  setState(() {
+                    _username = _usernameController.text;
+                    _password = _passwordController.text;
+                  });
+                  showDialog(
+                    context: context,
+                    builder: (BuildContext context) {
+                      return AlertDialog(
+                        title: const Text('Infos de connexion'),
+                        content: Column(
+                          mainAxisSize: MainAxisSize.min,
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text('Nom d\'utilisateur:$_username'),
+                            const SizedBox(height: 6.0),
+                            Text('Mot de passe : $_password'),
+                          ],
+                        ),
+                        actions: [
+                          ElevatedButton(
+                            onPressed: () {
+                              Navigator.of(context).pop();
+                            },
+                            style: ElevatedButton.styleFrom(backgroundColor: Colors.red),
+                            child: const Text('Fermer'),
+                          ),
+                        ],
+                      );
+                    },
+                  );
+                },
+                style: ElevatedButton.styleFrom(backgroundColor: const Color(0xFF007C91)),
+                child: const Text('Authentification'),
               ),
             ],
           ),
-        ));
+        ),
+      ),
+    );
   }
 }
