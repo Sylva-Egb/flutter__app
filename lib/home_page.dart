@@ -19,7 +19,7 @@ class _HomePageState extends State<HomePage> {
               Expanded(
                 child: Image.network(
                   // URL de ma photo de profil depuis un reseau social linkedin
-                  'https://media.licdn.com/dms/image/D4D35AQFwqy7W4UiakQ/profile-framedphoto-shrink_400_400/0/1673191675259?e=1681912800&v=beta&t=Mwjle9DlTklteKkeGRj6-uL6s49Y5k9l1MKCXfBF1KE',
+                  'https://www.facebook.com/photo/?fbid=1144067282690843&set=a.115044505593131',
                   fit: BoxFit.cover,
                 ),
               ),
