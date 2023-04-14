@@ -1,8 +1,5 @@
 import 'package:flutter/material.dart';
 
-
-
-
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
 
@@ -29,7 +26,7 @@ class _HomePageState extends State<HomePage> {
               Expanded(
                 child: Image.asset(
                   // Chemin local de ma photo  image
-                  'assets/images/moi.jpg',
+                  'assets/images/moi.jpeg',
                   fit: BoxFit.cover,
                 ),
               ),
